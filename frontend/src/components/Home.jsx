@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
     const navigate = useNavigate();
+
+    // Retrieve the token from local storage
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+        // If no token is found, redirect to signin page
+        if (!token) {
+            navigate('/signin');
+        }
+    }, [token, navigate]);
 
     // Retrieve the username from local storage
     const username = localStorage.getItem('username') || 'Guest';
